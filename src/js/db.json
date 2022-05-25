@@ -1,0 +1,56 @@
+{
+  "produtos": [
+    {
+      "id": "1",
+      "nome": "arroz",
+      "vlr": "24.80",
+      "qtd": "1"
+    },
+    {
+      "id": "2",
+      "nome": "feijao",
+      "vlr": "24.80",
+      "qtd": "8"
+    },
+    {
+      "id": "3",
+      "nome": "uva",
+      "vlr": "24.80",
+      "qtd": "12"
+    }
+  ],
+  "categorias": [
+    {
+      "id": "1",
+      "descricao": "Alimentação"
+    },
+    {
+      "id": "3",
+      "descricao": "Educação"
+    },
+    {
+      "id": "4",
+      "descricao": "Outros"
+    },
+    {
+      "id": "hrbiba3",
+      "descricao": "Foi?"
+    },
+    {
+      "id": "1oh64t4u",
+      "descricao": "foiasd"
+    },
+    {
+      "id": "4aaddnie",
+      "descricao": "foiasd"
+    },
+    {
+      "id": "8cx7s146",
+      "descricao": "foiasd"
+    },
+    {
+      "id": "74u4w3ut",
+      "descricao": "foiasd"
+    }
+  ]
+}

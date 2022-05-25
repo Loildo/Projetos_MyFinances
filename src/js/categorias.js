@@ -2,6 +2,7 @@ import {cat as allCategorias}  from './dados.js'
 const inputCategoria = document.querySelector('#input-categoria');
 const form = document.querySelector('#formCategoria');
 const LE = document.querySelector('.ladoEsquerdo');
+const URL = 'http://localhost:3000/categorias'
 
 window.onload = () =>{
 
@@ -19,27 +20,29 @@ window.onload = () =>{
 
 form.onsubmit = (e) =>{
     e.preventDefault();
-    if(!inputCategoria.value){
-        return false;
-    }
-    
-    
-    let getAllCategorys = JSON.parse(localStorage.getItem("categorias"))
 
-    const addNewCategory = getAllCategorys ? [...getAllCategorys, {id: Math.floor(Date.now() * Math.random()).toString(36) ,descricao: inputCategoria.value}] : [{id: Math.floor(Date.now() * Math.random()).toString(36) ,descricao: inputCategoria.value}]
+    const categoria = JSON.stringify({id: Math.floor(Date.now() * Math.random()).toString(36) ,descricao: inputCategoria.value});
 
-    localStorage.setItem("categorias", JSON.stringify(addNewCategory))
-    
-    inputCategoria.value = ''
-    listAllCategorys()
-
-    
+    inputCategoria.value = '';
+    fetch(`${URL}`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: categoria
+    })
+        then(res => res.json())
+        then(() => {
+            location.reload();
+        })
 }
 
 
 function listAllCategorys () {
     LE.innerHTML = ''
-    const categorias = JSON.parse(localStorage.getItem("categorias"))
+    fetch(URL)
+        .then(res => res.json())
+        .then(categorias => 
     categorias.map( value => {
         const div1 = document.createElement('div')
         div1.setAttribute('class', 'row mb-4 justify-content-center align-items-center container-category')
@@ -62,39 +65,26 @@ function listAllCategorys () {
         div1.appendChild(span)
         LE.appendChild(div1)
         
-        span.addEventListener('click' , (e) => { 
-            console.log(e.target);
-            removeCategory(e.target)
+        span.addEventListener('click' , (e) => {
+            removeCategory(e.currentTarget)
         })
-    })
+    }))
 
 }
 
 const removeCategory = (elem) =>{
-    const element = elem.nodeName 
-    let idCategory = ''
-
-    console.log(elem.getAttribute('value'));
-    switch (element) {
-        case 'DIV':
-            idCategory = elem.firstChild.getAttribute('value') 
-            break;
-
-        case 'P':
-            idCategory = elem.getAttribute('value');
-            break;
-        
-        default:
-            break;
-    } 
-
-    idCategory = elem.getAttribute('value')
-    const allCategorias = JSON.parse(localStorage.getItem("categorias"))
+    const id = elem.getAttribute('value');
     
-
-    let updateCategory = allCategorias.filter( value => {return value.id != idCategory}) 
-    console.log(updateCategory);
-    localStorage.removeItem("categorias")
-    localStorage.setItem("categorias", JSON.stringify(updateCategory))
-    listAllCategorys()
+    let result = confirm('Tem certeza que quer remover essa categoria?');
+    
+    if(result){
+        fetch(`${URL}/${id}`,{
+            method: 'DELETE',
+        })
+            .then(res => res.json())
+            .then(() => {
+                location.reload();
+            })
+    }
+    
 }
