@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/x-icon" href="../docs/img/dinheiro-fiduciario.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Fonts Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gentium+Basic:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <title>MyFinance$</title>
+    <script>
+        function configuracao() {
+            window.location.href = 'configuracao.html'
+        }
+    </script>
+</head>
+
+<body>
+    <header class="container-fluid header">
+
+        <div class="row" style="height: 200px;">
+            <div class="col-2" id="logo">
+                <div style="width: 100%; height: 100%;">
+                    <img src="../docs/img/MyFinancesVerde.png" alt="" srcset="">
+                </div>
+            </div>
+
+            <div class="col-10" id="resto-verde">
+
+                <div class="row" id="navegacao">
+                    <div class="col-12">
+                        <div class="row h-100 justify-content-end" style="background-color: #5DA869;">
+                            <div class="col-md-3 col-lg-2 d-flex flex-column justify-content-center align-items-center">
+                                <img id="img-painel-controle" src="../docs/img/Painel.png" alt="" srcset="">
+                                <p class="m-0">Painel Controle</p>
+                            </div>
+
+                            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                                <img src="../docs/img/transacao.png" alt="" srcset="">
+                                <p class="m-0">Transações</p>
+                            </div>
+
+                            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                                <img src="../docs/img/relatorio.png" alt="" srcset="">
+                                <p class="m-0">Relatórios</p>
+                            </div>
+
+                            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                                <img src="../docs/img/limite.png" alt="" srcset="">
+                                <p class="m-0">Limite Despesas</p>
+                            </div>
+
+                            <div id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false"
+                                class="dropdown-toggle col-md-3 col-lg-2 d-flex flex-column justify-content-center align-items-center">
+                                <img src="../docs/img/user.png" alt="" srcset="">
+                                <p class="m-0">Minha Conta</p>
+
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Usuário</a>
+                                    <a class="dropdown-item" href="./configuracao.html" onclick="configuracao()">Configurações</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item hover-sair" href="#">
+                                        <button class="btn-sair">
+                                            Sair
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12" id="btn-drop">
+                        <nav class="navbar navbar-expand-lg navbar-light">
+                            
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                          
+                            <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+                                
+                                <ul class="navbar-nav mr-auto">
+                                    <a class="nav-link" href="./home.html">Painel de Controle</a>
+                                    <a class="nav-link" href="./transacoes.html">Transações</a>
+                                    <a class="nav-link" href="./relatorio.html">Relatorios</a>
+                                    <a class="nav-link" href="./limites.html">Limite despesas</a>
+                                    <a class="nav-link" href="./configuracao.html">Minha Conta</a>
+                                </ul>
+                    
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- parte de baixo navegação -->
+                <div class="row align-items-center" id="saldo">
+                    <div class="col-12">
+
+                        <div class="row justify-content-center">
+                            <h1>Gerenciamento de contas</h1>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="row">
+
+            <div class="col-sm-12 col-md-6 ladoEsquerdo mb-5">
+                <div class="row">
+                    <div class="col-12 pl-5">
+                        <h1>Minhas Contas</h1>
+                    </div>
+                </div>
+
+                <div class="contas mt-4">
+                    
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 ladoDireito">
+                
+                <div class="row mb-3">
+                    <div class="col-12 pl-5">
+                        <h1 id="title-add-conta">Adicionar Conta</h1>
+                    </div>
+                </div>
+
+                <form id="formMinhasContas">
+                    <div class="row container-conta-banco">
+                        
+                        <div class="col-3 text-center">
+                            <p>Banco</p>
+                        </div>
+
+                        <div class="col-6 container-input">
+                            <input id="banco" type="text">
+                        </div>
+
+                    </div>
+
+                    <div class="row container-conta-banco">
+                        
+                        <div class="col-3 text-center">
+                            <p>Saldo</p>
+                        </div>
+
+                        <div class="col-3 container-input">
+                            <input id="inputSaldo" type="number">
+                        </div>
+
+                    </div>
+
+                    <div class="row justify-content-center pb-4">
+                        <div class="col-5" id="container-button">
+                            <div class="add-nova-conta d-flex align-items-center justify-content-center">Adicionar</div>
+                            <div class="remove-conta align-items-center justify-content-center mt-4">Excluir</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </section>
+    </main>
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script type="module" src="./js/minhasContas.js"></script>
+</body>
+
+</html>
