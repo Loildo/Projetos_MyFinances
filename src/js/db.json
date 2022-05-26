@@ -1,22 +1,29 @@
 {
-  "produtos": [
+  "contas": [
     {
       "id": "1",
-      "nome": "arroz",
-      "vlr": "24.80",
-      "qtd": "1"
+      "descricao": "ca",
+      "valor": "3"
     },
     {
       "id": "2",
-      "nome": "feijao",
-      "vlr": "24.80",
-      "qtd": "8"
+      "descricao": "df",
+      "valor": "0"
     },
     {
       "id": "3",
-      "nome": "uva",
-      "vlr": "24.80",
-      "qtd": "12"
+      "descricao": "Nubank",
+      "valor": 0
+    },
+    {
+      "descricao": "test",
+      "valor": "3",
+      "id": "G5bmqkT"
+    },
+    {
+      "descricao": "a",
+      "valor": "3",
+      "id": "P6qGOx4"
     }
   ],
   "categorias": [
@@ -25,32 +32,12 @@
       "descricao": "Alimentação"
     },
     {
-      "id": "3",
+      "id": "2",
       "descricao": "Educação"
     },
     {
-      "id": "4",
+      "id": "3",
       "descricao": "Outros"
-    },
-    {
-      "id": "hrbiba3",
-      "descricao": "Foi?"
-    },
-    {
-      "id": "1oh64t4u",
-      "descricao": "foiasd"
-    },
-    {
-      "id": "4aaddnie",
-      "descricao": "foiasd"
-    },
-    {
-      "id": "8cx7s146",
-      "descricao": "foiasd"
-    },
-    {
-      "id": "74u4w3ut",
-      "descricao": "foiasd"
     }
   ]
 }
