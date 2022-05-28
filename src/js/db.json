@@ -86,5 +86,94 @@
       "id": "3",
       "descricao": "Outros"
     }
+  ],
+  "transacoes": [
+    {
+      "id": "1",
+      "tipo": "1",
+      "valor": null,
+      "descricao": null,
+      "conta": null,
+      "categoria": null,
+      "data": null,
+      "recorrencia": null
+    },
+    {
+      "id": "1",
+      "tipo": "2",
+      "valor": null,
+      "descricao": null,
+      "conta": null,
+      "categoria": null,
+      "data": null,
+      "recorrencia": null
+    },
+    {
+      "tipo": 1,
+      "valor": -5,
+      "descricao": "teste",
+      "data": "2022-05-28",
+      "recorrencia": "1",
+      "conta": "1",
+      "categoria": "1",
+      "id": "3_00-At"
+    },
+    {
+      "tipo": 2,
+      "valor": "20",
+      "descricao": "recetia",
+      "data": "2022-05-28",
+      "recorrencia": "1",
+      "conta": "3",
+      "categoria": "1",
+      "id": "u8mYmzF"
+    },
+    {
+      "tipo": "",
+      "valor": 20,
+      "descricao": "asdf",
+      "data": "2022-05-12",
+      "recorrencia": "2",
+      "conta": "G5bmqkT",
+      "categoria": "1",
+      "id": "n2HGjZB"
+    },
+    {
+      "tipo": "",
+      "valor": 3,
+      "descricao": "dfdf",
+      "data": "2022-05-19",
+      "recorrencia": "1",
+      "conta": "1",
+      "categoria": "1",
+      "id": "kypv9HC"
+    },
+    {
+      "tipo": 2,
+      "valor": 3,
+      "descricao": "dfdf",
+      "data": "2022-05-19",
+      "recorrencia": "1",
+      "conta": "1",
+      "categoria": "1",
+      "id": "bAvIXiz"
+    },
+    {
+      "tipo": 1,
+      "valor": -3,
+      "descricao": "dfdf",
+      "data": "2022-05-27",
+      "recorrencia": 1,
+      "conta": 2,
+      "categoria": 1,
+      "id": "OOhxNEI"
+    }
+  ],
+  "limite": [
+    {
+      "id": "1",
+      "valor": null,
+      "data": null
+    }
   ]
 }

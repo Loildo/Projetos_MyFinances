@@ -135,19 +135,19 @@
                 
                 <div class="row justify-content-center mt-3 mb-5">
                     <div class="col-8">
-                        <button id="button-esqu">Despesas</button>
+                        <button class="button-esqu">Despesas</button>
                     </div>
                 </div>
 
                 <div class="row justify-content-center mb-5">
                     <div class="col-8">
-                        <button id="button-esqu">Receita</button>
+                        <button class="button-esqu">Receita</button>
                     </div>
                 </div>
 
                 <div class="row justify-content-center mb-5">
                     <div class="col-8">
-                        <button id="button-esqu">Transferência</button>
+                        <button class="button-esqu">Transferência</button>
                     </div>
                 </div>
 
@@ -155,70 +155,73 @@
             </div>
 
             <div class="col-sm-12 col-md-6 ladoDireito">
-                <div class="row mb-5 justify-content-center">
-                     <div class="col-5 text-center">
-                         <div class="d-flex">
-                             <label class="green" >R$ </label>
-                             <input id="valor" type="text" placeholder="valor" value="200,00">
-                         </div>
-                     </div>
-                 </div>
-  
-                 <div class="row mb-5 justify-content-center" id="descricao">
-                     <div class="col-10">
-                         <p>Descrição</p>
-                         <div>
-                             <img src="../docs/img/icons8-lápis-48.png" alt="" srcset="">
-                             <input type="text">
-                         </div>
-                     </div>
-                 </div>
-  
-                 <div class="row justify-content-center mb-5">
-                     <div class="col-4 mr-5 transacao-conta d-flex flex-column" >
-                         <label for="">Conta</label>
-                         <select name="" id="">
-                             <option value="">Poupança</option>
-                             <option value="">Nubank</option>
-                             <option value="">Caixa</option>
-                         </select>
-                     </div>
-  
-                     <div class="col-6 d-flex flex-column">
-                         <label for="">Categoria</label>
-                         <select name="" id="">
-                             <option value="">Alimentação</option>
-                             <option value="">Compras</option>
-                             <option value="">Educaçaõ</option>
-                         </select>
-                     </div>
-                 </div>
-  
-                 <div class="row justify-content-center mb-5">
-                     <div class="col-md-12 col-lg-4 mr-5 trans-date">
-                         <label for="trans-input-date">Data</label>
-                         <input id="trans-input-date" type="date">
-                     </div>
-                     
-                     <div class="col-md-12 col-lg-6">
-                         <label>Repetir lançamento?</label>
-                         <div class="row">
-                             <div class="col-5">
-                                 <button class="btn btn-sm btn-lancamento">Fixa</button>
-                             </div>
-                             <div class="col-6">
-                                 <button class="btn btn-sm btn-lancamento">Parcelado</button>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-  
-                 <div class="row justify-content-center mb-5">
-                     <div class="col-6">
-                         <button id="btn-confirmar" class="btn">Confirmar</button>
-                     </div>
-                 </div>
-  
+                <form id="formTransacao" method="POST">
+                    <!-- Valor -->
+                    <div class="row mb-5 justify-content-center">
+                        <div class="col-5 text-center">
+                            <div class="d-flex">
+                                <label class="green" >R$ </label>
+                                <input id="valor" name="valor" type="number" placeholder="valor" value="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Descricao -->
+                    <div class="row mb-5 justify-content-center" id="descricao">
+                        <div class="col-10">
+                            <p>Descrição</p>
+                            <div>
+                                <img src="../docs/img/icons8-lápis-48.png" alt="" srcset="">
+                                <input id="inputDescricao" type="text" name="descricao" value="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conta e Categoria -->
+                    <div class="row justify-content-center mb-5">
+                        <div class="col-4 mr-5 transacao-conta d-flex flex-column" >
+                            <label for="">Conta</label>
+                            <select id="select-contas" name="contas">
+                                
+                            </select>
+                        </div>
+
+                        <div class="col-6 d-flex flex-column">
+                            <label for="">Categoria</label>
+                            <select id="select-categorias" name="categorias">
+                                
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Data e Recorrencia -->
+                    <div class="row justify-content-center mb-5">
+                        <div class="col-md-12 col-lg-4 mr-5 trans-date">
+                            <label for="trans-input-date">Data</label>
+                            <input name="data" id="trans-input-date" type="date">
+                        </div>
+                        
+                        <div class="col-md-12 col-lg-6">
+                            <label>Repetir lançamento?</label>
+                            <div class="row recorrencia">
+                                <div class="col-5">
+                                    <input type="radio" checked name="reco" value="1" id="fixa">
+                                    <label for="fixa">Fixa</label>
+                                </div>
+                                <div class="col-6">
+                                    <input type="radio" name="reco" value="2" id="parcelado">
+                                    <label for="parcelado">Parcelado</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center mb-5">
+                        <div class="col-6">
+                            <button id="btn-confirmar" class="btn">Confirmar</button>
+                        </div>
+                    </div>
+                </form>
              </div>
 
         </section>
