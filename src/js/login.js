@@ -3,14 +3,18 @@ const email = document.querySelector('#email');
 const password = document.querySelector('#password');
 const form = document.querySelector('#formLogin');
 const btnSubmit = document.querySelector('#btnSubmit');
+const URL = 'http://localhost:3000/user';
+let user = '';
 
 window.onload = () =>{
     console.log('login-load');
-    let user = JSON.parse(localStorage.getItem('users'))
-    if(!user)
-        localStorage.setItem('users', JSON.stringify([{ nome: 'loildo', email: 'loildo@loildo.com', password: '123'},]))
-    
-}
+    fetch(URL)
+        .then(res => res.json())
+        .then(res => {
+            user = res
+        })
+        .then(res => console.log(user))
+}   
 
 form.onsubmit = (e) => {
     e.preventDefault()
@@ -18,10 +22,11 @@ form.onsubmit = (e) => {
         alert('Os campos precisam ser preenchidos');
         return false;
     }
-    
+
     let validate = validateUserLogin({email: email.value, password: password.value})
     
     if(validate.success){
+        localStorage.setItem('token', Math.floor(Math.random() * Date.now()))
         window.location.href = 'home.html'
     } else if (validate.error){
         alert('E-mail ou Senha inválidos')
@@ -32,10 +37,10 @@ form.onsubmit = (e) => {
 };
 
 const validateUserLogin = ({email, password}) => {
-    const user = JSON.parse(localStorage.getItem('users'))
     let login = {};
 
     let validateEmail = user.find( elem => {
+        console.log(elem);
         return elem.email == email
     })
 
@@ -45,7 +50,7 @@ const validateUserLogin = ({email, password}) => {
         }
     }
 
-    let validatePassword = validateEmail.password == password ? true : false
+    let validatePassword = validateEmail.senha == password ? true : false
     
     if(validatePassword){
         return login = {

@@ -2,15 +2,14 @@ import {cat as allCategorias}  from './dados.js'
 const inputCategoria = document.querySelector('#input-categoria');
 const form = document.querySelector('#formCategoria');
 const LE = document.querySelector('.ladoEsquerdo');
+const bntSair = document.querySelector('.hover-sair')
 const URL = 'http://localhost:3000/categorias'
 
 window.onload = () =>{
-
     console.log('onload-categorias');
-    let cat = JSON.parse(localStorage.getItem("categorias"))
     
-    if(!cat){
-        localStorage.setItem("categorias", JSON.stringify(allCategorias))
+    if(!localStorage.getItem('token')){
+        window.location.href = 'index.html'
     }
     LE.innerHTML = ''
     
@@ -88,3 +87,8 @@ const removeCategory = (elem) =>{
     }
     
 }
+
+bntSair.addEventListener('click', () => {
+    localStorage.removeItem('token')
+    window.location.href = 'index.html'
+})

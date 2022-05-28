@@ -1,4 +1,36 @@
 {
+  "user": [
+    {
+      "id": "1",
+      "nome": "Loildo",
+      "email": "loildo@loildo.com",
+      "senha": "123"
+    },
+    {
+      "id": "_e8ygZZ"
+    },
+    {
+      "id": "9oTUDVR"
+    },
+    {
+      "nome": "asdfa",
+      "email": "teste@teste.com",
+      "senha": "123",
+      "id": "Z-amnny"
+    },
+    {
+      "nome": "salve",
+      "email": "salve@salve.com",
+      "senha": "123",
+      "id": "NzmbPgD"
+    },
+    {
+      "nome": "asdf",
+      "email": "teste@teste.com3",
+      "senha": "d",
+      "id": "HCpDaFN"
+    }
+  ],
   "contas": [
     {
       "id": "1",
@@ -24,6 +56,21 @@
       "descricao": "a",
       "valor": "3",
       "id": "P6qGOx4"
+    },
+    {
+      "descricao": "s",
+      "valor": "3",
+      "id": "f8x1BB3"
+    },
+    {
+      "descricao": "d",
+      "valor": "3",
+      "id": "L8P7sqE"
+    },
+    {
+      "descricao": "d",
+      "valor": "3",
+      "id": "DprD_SO"
     }
   ],
   "categorias": [

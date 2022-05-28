@@ -5,16 +5,21 @@ const banco = document.querySelector('#banco');
 const btnSubmit = document.querySelector('.add-nova-conta')
 const btnRemove = document.querySelector('.remove-conta')
 const title = document.querySelector('#title-add-conta')
+const bntSair = document.querySelector('.hover-sair')
 let idConta = '';
 
 const URL = 'http://localhost:3000/contas';
 
 window.onload = () =>{
     console.log('load-minhas-contas');
+    
+    if(!localStorage.getItem('token')){
+        window.location.href = 'index.html'
+    }
+    
     saldo.setAttribute('placeholder', '0,00');
-    let result = localStorage.getItem('bancos')
-    if(!result)
-        localStorage.setItem("bancos", JSON.stringify(bancos))
+    
+
 
     listAllBank()
 }
@@ -215,3 +220,8 @@ const listAllBank = () => {
         )
 
 }
+
+bntSair.addEventListener('click', () => {
+    localStorage.removeItem('token')
+    window.location.href = 'index.html'
+})
