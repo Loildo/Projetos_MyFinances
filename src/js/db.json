@@ -34,43 +34,18 @@
   "contas": [
     {
       "id": "1",
-      "descricao": "ca",
+      "descricao": "Caixa",
       "valor": "3"
     },
     {
       "id": "2",
-      "descricao": "df",
+      "descricao": "Poupança",
       "valor": "0"
     },
     {
       "id": "3",
       "descricao": "Nubank",
       "valor": 0
-    },
-    {
-      "descricao": "test",
-      "valor": "3",
-      "id": "G5bmqkT"
-    },
-    {
-      "descricao": "a",
-      "valor": "3",
-      "id": "P6qGOx4"
-    },
-    {
-      "descricao": "s",
-      "valor": "3",
-      "id": "f8x1BB3"
-    },
-    {
-      "descricao": "d",
-      "valor": "3",
-      "id": "L8P7sqE"
-    },
-    {
-      "descricao": "d",
-      "valor": "3",
-      "id": "DprD_SO"
     }
   ],
   "categorias": [
