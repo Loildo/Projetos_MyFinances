@@ -11,7 +11,7 @@ let idConta = '';
 const URL = 'http://localhost:3000/contas';
 
 window.onload = () =>{
-    console.log('load-minhas-contas');
+    // console.log('load-minhas-contas');
     
     if(!localStorage.getItem('token')){
         window.location.href = 'index.html'
@@ -77,7 +77,7 @@ form.onsubmit = (e) =>{
 
 
 const validateValues = (saldo, banco) => {
-    console.log(banco);
+    // console.log(banco);
     if(!saldo || !banco){
         return false;
     }
@@ -94,11 +94,11 @@ const edit = (elem) => {
     fetch(`${URL}/${id}`)
         .then(res => res.json())
         .then(res => {
-            console.log(res)
+            // console.log(res)
             banco.value = res.descricao
             saldo.value = res.valor
             idConta = id
-            console.log(idConta);
+            // console.log(idConta);
         })
     
 }

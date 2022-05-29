@@ -6,7 +6,7 @@ const bntSair = document.querySelector('.hover-sair')
 const URL = 'http://localhost:3000/categorias'
 
 window.onload = () =>{
-    console.log('onload-categorias');
+    // console.log('onload-categorias');
     
     if(!localStorage.getItem('token')){
         window.location.href = 'index.html'

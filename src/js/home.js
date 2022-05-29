@@ -71,7 +71,7 @@ const listBank = () => {
             })
 
             const saldoGeral = document.querySelector('#saldo-geral')
-            console.log(saldoGeral);
+            // console.log(saldoGeral);
             saldoGeral.innerHTML = saldoTotal
             
         })

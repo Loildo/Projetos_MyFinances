@@ -21,7 +21,7 @@ window.onload = () => {
     fetch(`${URL}/transacoes`)
         .then(res => res.json())
         .then(res => {
-            console.log(res);
+            // console.log(res);
         })
 
     // buscas as contas cadastras

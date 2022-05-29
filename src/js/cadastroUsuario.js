@@ -9,13 +9,13 @@ const URL = 'http://localhost:3000/user';
 let user = '';
 
 window.onload = () =>{
-    console.log('onload-Cadastro')
+    // console.log('onload-Cadastro')
     fetch(URL)
         .then(res => res.json())
         .then(res => {
             user = res
         })
-        .then(res => console.log(user))
+        // .then(res => console.log(user))
 
 }
 
@@ -60,7 +60,7 @@ const addUser = async (newUser) => {
     })  
         .then((resp) => resp.json())
         .then(function(data) {
-            console.log(data);
+            // console.log(data);
         })
 
 }

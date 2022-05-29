@@ -7,14 +7,14 @@ const URL = 'http://localhost:3000'
 let limites = '';
 
 window.onload = () => {
-    console.log('onload-limite');
+    // console.log('onload-limite');
     if(!localStorage.getItem('token')){
         window.location.href = 'index.html'
     }
     fetch(`${URL}/limites`)
         .then(res => res.json())
         .then(res => {
-            console.log(res);
+            // console.log(res);
             limites = res
             if(limites[4].ativo == 1)
                 inputValor.value = limites[4].valor
@@ -108,7 +108,7 @@ form.onsubmit = (e) =>{
         
     const valor = form.valor.value
 
-    console.log(form.valor);
+    // console.log(form.valor);
     if(!valor || valor <= 0){
         alert('O valor não pode ser menor ou igual 0!')
         return false

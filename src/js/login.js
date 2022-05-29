@@ -7,13 +7,13 @@ const URL = 'http://localhost:3000/user';
 let user = '';
 
 window.onload = () =>{
-    console.log('login-load');
+    // console.log('login-load');
     fetch(URL)
         .then(res => res.json())
         .then(res => {
             user = res
         })
-        .then(res => console.log(user))
+        // .then(res => console.log(user))
 }   
 
 form.onsubmit = (e) => {
@@ -40,7 +40,7 @@ const validateUserLogin = ({email, password}) => {
     let login = {};
 
     let validateEmail = user.find( elem => {
-        console.log(elem);
+        // console.log(elem);
         return elem.email == email
     })
 
