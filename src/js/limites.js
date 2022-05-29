@@ -40,7 +40,7 @@ const listLimites = () => {
         divContainer.appendChild(div)
 
         button.addEventListener('click', (e) => {
-            let result = confirm("Tem certeza que deseja ativar o esse limite?")
+            let result = confirm("Tem certeza que quer ativar esse limite?")
             if(result){
                 ativarLimite(e)
             }
@@ -94,6 +94,18 @@ bntSair.addEventListener('click', () => {
 
 form.onsubmit = (e) =>{
     e.preventDefault()
+    if(e.submitter.name == 'remover'){
+        let result = confirm('Tem certeza que quer remover o limite?')
+        if(result){
+            limites.map( value => {
+                setTimeout(() => {
+
+                },1500)
+                desativarLimite(value)
+            })
+        }
+    }
+        
     const valor = form.valor.value
 
     console.log(form.valor);
