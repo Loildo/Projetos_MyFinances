@@ -12,6 +12,7 @@ const URL = 'http://localhost:3000'
 let contas = '';
 let categorias = '';
 let tipo = '';
+let limite = '';
 
 window.onload = () => {
     if(!localStorage.getItem('token')){
@@ -30,14 +31,18 @@ window.onload = () => {
             contas = res
             listContas()
         })
-
+    // busca as categorias
     fetch(`${URL}/categorias`)
         .then(res => res.json())
         .then(res => {
             categorias = res
             listCategorias()
         })
-    
+    fetch(`${URL}/limites?ativo=1`)
+        .then(resp => resp.json())
+        .then(res => {
+            limite = res
+        })
     
 
 }
@@ -101,6 +106,10 @@ const validateValues = ({ valor, descricao, data, recorrencia, conta, categoria 
 
 form.onsubmit = (e) => {
     e.preventDefault()
+    if(form.valor.value >= limite[0].valor){
+        alert('O valor é maior que o limite de R$'+limite[0].valor+' adicionado!')
+        return false
+    }
 
     const valor = form.valor.value
     const descricao = form.descricao.value

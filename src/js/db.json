@@ -167,13 +167,23 @@
       "conta": 2,
       "categoria": 1,
       "id": "OOhxNEI"
+    },
+    {
+      "tipo": 1,
+      "valor": -600,
+      "descricao": "dfdf",
+      "data": "2022-05-30",
+      "recorrencia": 1,
+      "conta": 1,
+      "categoria": 1,
+      "id": "gRXNHss"
     }
   ],
   "limites": [
     {
       "valor": 500,
       "data": null,
-      "ativo": null,
+      "ativo": 1,
       "id": "1"
     },
     {
@@ -197,7 +207,7 @@
     {
       "valor": 5,
       "data": null,
-      "ativo": 1,
+      "ativo": null,
       "id": "5"
     }
   ]
