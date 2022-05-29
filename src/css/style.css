@@ -259,6 +259,10 @@ header {
     font-weight: bold;
 }
 
+#container-btn-valor .ativo {
+    background-color: #8afd9d;
+}
+
 #container-novo-valor p{
     font-size: 25px;
 }
@@ -424,6 +428,12 @@ header {
 }
  
 .transacoes-conta{
+    width: 100%;
+}
+
+.limites #btn-confirmar {
+    background-color: #5DA869;
+    border-radius: 50px;
     width: 100%;
 }
 
