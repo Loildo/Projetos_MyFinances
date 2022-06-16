@@ -36,7 +36,7 @@
     {
       "id": "1",
       "descricao": "Caixa",
-      "valor": -2
+      "valor": 0
     },
     {
       "id": "2",
@@ -46,7 +46,7 @@
     {
       "id": "3",
       "descricao": "Nubank",
-      "valor": 3
+      "valor": 6
     }
   ],
   "categorias": [
@@ -89,11 +89,47 @@
     {
       "tipo": 2,
       "valor": 20,
-      "descricao": "asdf",
+      "descricao": "asasdfasdfasdfasdfasdfasdfasdfasfasdfaddf",
       "data": "2022-06-15",
       "conta": "2",
       "categoria": "1",
       "id": 3
+    },
+    {
+      "tipo": 2,
+      "valor": 2,
+      "descricao": "asdfads",
+      "data": "2022-06-17",
+      "conta": "1",
+      "categoria": "3",
+      "id": 4
+    },
+    {
+      "tipo": 2,
+      "valor": 3,
+      "descricao": "adsf",
+      "data": "2022-06-15",
+      "conta": "3",
+      "categoria": "1",
+      "id": 5
+    },
+    {
+      "tipo": 1,
+      "valor": -3,
+      "descricao": "asdf",
+      "data": "2022-06-17",
+      "conta": "1",
+      "categoria": "1",
+      "id": 6
+    },
+    {
+      "tipo": 2,
+      "valor": 3,
+      "descricao": "asdfasdfasdf",
+      "data": "2022-06-16",
+      "conta": "1",
+      "categoria": "1",
+      "id": 7
     }
   ],
   "limites": [

@@ -2,7 +2,7 @@ const bntSair = document.querySelector('.hover-sair')
 const btnOlho = document.querySelector('#img-olho')
 const saldoGeral = document.querySelector('#saldo-geral')
 const nomeUsuario = document.querySelector('#nome-usuario')
-
+const listaLancamentos = document.querySelector('#lista-lancamentos')
 const URL = 'http://localhost:3000';
 let idConta = '';
 let Saldo = null;
@@ -43,7 +43,7 @@ const calcSaldoGeral = async() => {
 
     let obj = null;
     let data = [];
-    dados.contas.map( value => {
+    await dados.contas.map( value => {
         obj = {id: value.descricao, valor: 0};
 
         dados.transacoes.forEach( desc => {
@@ -56,9 +56,10 @@ const calcSaldoGeral = async() => {
 
     // data.forEach( value => Saldo += value.valor)
     saldoGeral.innerHTML = Saldo
-    console.log(data);
+    // console.log(data);
     
     listBank(data)
+    listRegistry(dados)
 }
 
 const listBank = (data) => {
@@ -95,7 +96,8 @@ const listBank = (data) => {
             
                 const parag = document.createElement('p')
                 const span1 = document.createElement('span')
-                span1.setAttribute('class', 'green')
+                // span1.setAttribute('class', 'green')
+                
                 span1.innerHTML = 'R$ '
                 
                 const span2 = document.createElement('span')
@@ -103,7 +105,8 @@ const listBank = (data) => {
                 // let stringValor = +`${valor}`.replace(',','').replace(',','')
                 // span2.innerHTML =  stringValor.toFixed(2)
                 span2.innerHTML =  value.valor
-
+                span1.style.color = `${value.valor >= 0 ? 'green' : 'red'}`
+                span2.style.color = `${value.valor >= 0 ? 'green' : 'red'}`
                 
                 div2.appendChild(img)
                 div3.appendChild(h2)
@@ -132,6 +135,7 @@ const listBank = (data) => {
 
 }
 
+
 btnOlho.addEventListener('click', () => {
     let toggleEyes = btnOlho.getAttribute('data-close');
 
@@ -151,8 +155,36 @@ btnOlho.addEventListener('click', () => {
     }
 })
 
-const listRegistry = () => {
+const listRegistry = (dados) => {
+    listaLancamentos.innerHTML = '';
+    console.log(dados.transacoes);
+    dados.transacoes.map( (value, index) => {
+        if(index <= 4){
+            const div1 = document.createElement('div')
+            div1.setAttribute('class', 'row')
+            div1.style.color = `${value.valor >= 0 ? 'green' : 'red'}`
 
+            const divData = document.createElement('div')
+            divData.setAttribute('class', 'col-3')
+            divData.innerHTML = value.data
+
+            const divDesc = document.createElement('div')
+            divDesc.setAttribute('class', 'col-6')
+            divDesc.innerHTML = value.descricao
+            divDesc.style.wordBreak = "break-all";
+
+            const divValor = document.createElement('div')
+            divValor.setAttribute('class', 'col-3')
+            divValor.innerHTML = `R$ ${value.valor.toFixed(2)}`
+
+
+            div1.appendChild(divData);
+            div1.appendChild(divDesc);
+            div1.appendChild(divValor);
+
+            listaLancamentos.appendChild(div1)
+        }  
+    })
 }
 
 bntSair.addEventListener('click', () => {
