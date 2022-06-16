@@ -1,4 +1,3 @@
-import { bancos } from "./dados.js";
 const form = document.querySelector('#formMinhasContas');
 const saldo = document.querySelector('#inputSaldo');
 const banco = document.querySelector('#banco');
@@ -6,6 +5,7 @@ const btnSubmit = document.querySelector('.add-nova-conta')
 const btnRemove = document.querySelector('.remove-conta')
 const title = document.querySelector('#title-add-conta')
 const bntSair = document.querySelector('.hover-sair')
+const nomeUsuario = document.querySelector('#nome-usuario')
 let idConta = '';
 
 const URL = 'http://localhost:3000/contas';
@@ -16,6 +16,9 @@ window.onload = () =>{
     if(!localStorage.getItem('token')){
         window.location.href = 'index.html'
     }
+    let me = JSON.parse(localStorage.getItem('me'))
+
+    nomeUsuario.innerHTML = `${me.nome}`
     
     saldo.setAttribute('placeholder', '0,00');
     
@@ -104,17 +107,25 @@ const edit = (elem) => {
 }
 
 
-const remove = (elem) => {
+const remove = async(elem) => {
     let result = confirm('Tem certeza que quer remover essa conta?');
 
+    
+    
     if(result){
         idConta = elem.getAttribute('value')
-    
-        fetch(`${URL}/${idConta}`,{
-            method: 'DELETE'
-        })
-            .then(res => res.json)
-            .then(() => location.reload())
+        let transacoes = await fetch(`http://localhost:3000/transacoes?conta=${idConta}`).then(res => res.json())
+        console.log(transacoes);
+        if(transacoes.length > 0){
+            alert('Você possui transações para essa conta, não é possível remove-la!')
+            return false
+        } else {
+            fetch(`${URL}/${idConta}`,{
+                method: 'DELETE'
+            })
+                .then(res => res.json)
+                .then(() => location.reload())    
+        }
     }
 
 }
@@ -223,5 +234,6 @@ const listAllBank = () => {
 
 bntSair.addEventListener('click', () => {
     localStorage.removeItem('token')
+    localStorage.removeItem('me')
     window.location.href = 'index.html'
 })

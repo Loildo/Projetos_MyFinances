@@ -78,7 +78,7 @@
                                 <p class="m-0">Minha Conta</p>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item">Usuário</a>
+                                    <a class="dropdown-item" id="nome-usuario">Usuário</a>
                                     <a class="dropdown-item" href="./configuracao.html" onclick="configuracao()">Configurações</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item hover-sair">
@@ -130,13 +130,13 @@
 
                                     <div class="col-md-5 col-lg-6" id="container-saldo-geral">
                                         <p class="mr-3">Saldo Geral</p>
-                                        <img id='img-olho-fechado' src="../docs/img/olho-aberto.png" alt="" srcset="">
+                                        <img id='img-olho' data-close="true" src="../docs/img/olho-aberto.png" alt="" srcset="">
 
                                     </div>
 
                                     <div class="col-md-4 col-lg-5" id="container-valor">
                                         <p >
-                                            <span class="green">R$</span>
+                                            <span>R$</span>
                                             <span id="saldo-geral"></span>
                                         </p>
                                     </div>
@@ -228,8 +228,40 @@
 
             <div class="col-sm-12 col-md-6">
                 <div class="row">
-                    <div class="col-12 pl-5">
+                    <div class="col-12 pl-5 mb-4">
                         <h1>Últimos lançamentos</h1>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <!-- Linha -->
+                                <div class="row">
+                                    <div class="col-3">
+                                        <p>17-06-2022</p>
+                                    </div>
+                                    <div class="col-7">
+                                        <p>Mensalidade Faculdade</p>
+                                    </div>
+                                    <div class="col-2">
+                                        <p>$800,00</p>
+                                    </div>
+                                </div>
+
+                                <!-- Linha -->
+                                <div class="row">
+                                    <div class="col-3">
+                                        <p>20-06-2022</p>
+                                    </div>
+                                    <div class="col-7">
+                                        <p>Presente</p>
+                                    </div>
+                                    <div class="col-2">
+                                        <p>$200,00</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>

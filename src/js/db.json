@@ -4,19 +4,14 @@
       "id": "1",
       "nome": "Loildo",
       "email": "loildo@loildo.com",
-      "senha": "123"
+      "senha": "123",
+      "token": 123
     },
     {
-      "id": "_e8ygZZ"
-    },
-    {
-      "id": "9oTUDVR"
-    },
-    {
+      "id": "Z-amnny",
       "nome": "asdfa",
       "email": "teste@teste.com",
-      "senha": "123",
-      "id": "Z-amnny"
+      "senha": "d"
     },
     {
       "nome": "salve",
@@ -29,136 +24,83 @@
       "email": "teste@teste.com3",
       "senha": "d",
       "id": "HCpDaFN"
+    },
+    {
+      "nome": "asd",
+      "email": "asdfasdfd@casdfasdc.com",
+      "senha": "123",
+      "id": "AxA6fxR"
     }
   ],
   "contas": [
     {
       "id": "1",
       "descricao": "Caixa",
-      "valor": "3"
+      "valor": -2
     },
     {
       "id": "2",
       "descricao": "Poupança",
-      "valor": "0"
+      "valor": 20
     },
     {
       "id": "3",
       "descricao": "Nubank",
-      "valor": 0
+      "valor": 3
     }
   ],
   "categorias": [
     {
-      "id": "1",
+      "id": 1,
       "descricao": "Alimentação"
     },
     {
-      "id": "2",
+      "id": 2,
       "descricao": "Educação"
     },
     {
-      "id": "3",
+      "id": 3,
       "descricao": "Outros"
+    },
+    {
+      "id": "7hnmglwa",
+      "descricao": "teste"
     }
   ],
   "transacoes": [
     {
-      "id": "1",
-      "tipo": "1",
-      "valor": null,
-      "descricao": null,
-      "conta": null,
-      "categoria": null,
-      "data": null,
-      "recorrencia": null
-    },
-    {
-      "id": "1",
-      "tipo": "2",
-      "valor": null,
-      "descricao": null,
-      "conta": null,
-      "categoria": null,
-      "data": null,
-      "recorrencia": null
-    },
-    {
       "tipo": 1,
-      "valor": -5,
-      "descricao": "teste",
-      "data": "2022-05-28",
-      "recorrencia": "1",
+      "valor": -2,
+      "descricao": "asdf",
+      "data": "2022-06-15",
       "conta": "1",
-      "categoria": "1",
-      "id": "3_00-At"
+      "categoria": "3",
+      "id": 1
     },
     {
       "tipo": 2,
-      "valor": "20",
-      "descricao": "recetia",
-      "data": "2022-05-28",
-      "recorrencia": "1",
+      "valor": 3,
+      "descricao": "asdf",
+      "data": "2022-06-08",
       "conta": "3",
-      "categoria": "1",
-      "id": "u8mYmzF"
+      "categoria": "2",
+      "id": 2
     },
     {
-      "tipo": "",
+      "tipo": 2,
       "valor": 20,
       "descricao": "asdf",
-      "data": "2022-05-12",
-      "recorrencia": "2",
-      "conta": "G5bmqkT",
+      "data": "2022-06-15",
+      "conta": "2",
       "categoria": "1",
-      "id": "n2HGjZB"
-    },
-    {
-      "tipo": "",
-      "valor": 3,
-      "descricao": "dfdf",
-      "data": "2022-05-19",
-      "recorrencia": "1",
-      "conta": "1",
-      "categoria": "1",
-      "id": "kypv9HC"
-    },
-    {
-      "tipo": 2,
-      "valor": 3,
-      "descricao": "dfdf",
-      "data": "2022-05-19",
-      "recorrencia": "1",
-      "conta": "1",
-      "categoria": "1",
-      "id": "bAvIXiz"
-    },
-    {
-      "tipo": 1,
-      "valor": -3,
-      "descricao": "dfdf",
-      "data": "2022-05-27",
-      "recorrencia": 1,
-      "conta": 2,
-      "categoria": 1,
-      "id": "OOhxNEI"
-    },
-    {
-      "tipo": 1,
-      "valor": -600,
-      "descricao": "dfdf",
-      "data": "2022-05-30",
-      "recorrencia": 1,
-      "conta": 1,
-      "categoria": 1,
-      "id": "gRXNHss"
+      "id": 3
     }
   ],
   "limites": [
     {
       "valor": 500,
       "data": null,
-      "ativo": 1,
+      "ativo": null,
       "id": "1"
     },
     {
@@ -170,7 +112,7 @@
     {
       "valor": 1500,
       "data": null,
-      "ativo": null,
+      "ativo": 1,
       "id": "3"
     },
     {

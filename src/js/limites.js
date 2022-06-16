@@ -2,7 +2,7 @@ const bntSair = document.querySelector('.hover-sair')
 const divContainer = document.querySelector('#container-btn-valor')
 const form = document.querySelector('#formLimites')
 const inputValor = document.querySelector('#input-valor')
-
+const nomeUsuario = document.querySelector('#nome-usuario')
 const URL = 'http://localhost:3000'
 let limites = '';
 
@@ -11,6 +11,10 @@ window.onload = () => {
     if(!localStorage.getItem('token')){
         window.location.href = 'index.html'
     }
+    let me = JSON.parse(localStorage.getItem('me'))
+
+    nomeUsuario.innerHTML = `${me.nome}`
+
     fetch(`${URL}/limites`)
         .then(res => res.json())
         .then(res => {
@@ -89,6 +93,7 @@ const ativarLimite = (e) => {
 
 bntSair.addEventListener('click', () => {
     localStorage.removeItem('token')
+    localStorage.removeItem('me')
     window.location.href = 'index.html'
 })
 

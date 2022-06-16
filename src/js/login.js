@@ -5,6 +5,7 @@ const form = document.querySelector('#formLogin');
 const btnSubmit = document.querySelector('#btnSubmit');
 const URL = 'http://localhost:3000/user';
 let user = '';
+let me = '';
 
 window.onload = () =>{
     // console.log('login-load');
@@ -27,6 +28,9 @@ form.onsubmit = (e) => {
     
     if(validate.success){
         localStorage.setItem('token', Math.floor(Math.random() * Date.now()))
+        console.log(me);
+        debugger;
+        localStorage.setItem('me', JSON.stringify(me))
         window.location.href = 'home.html'
     } else if (validate.error){
         alert('E-mail ou Senha inválidos')
@@ -40,7 +44,12 @@ const validateUserLogin = ({email, password}) => {
     let login = {};
 
     let validateEmail = user.find( elem => {
-        // console.log(elem);
+        console.log(elem);
+        me = {
+            id: elem.id,
+            nome: elem.nome,
+            email: elem.email
+        }
         return elem.email == email
     })
 

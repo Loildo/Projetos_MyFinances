@@ -1,8 +1,8 @@
-import {cat as allCategorias}  from './dados.js'
 const inputCategoria = document.querySelector('#input-categoria');
 const form = document.querySelector('#formCategoria');
 const LE = document.querySelector('.ladoEsquerdo');
 const bntSair = document.querySelector('.hover-sair')
+const nomeUsuario = document.querySelector('#nome-usuario')
 const URL = 'http://localhost:3000/categorias'
 
 window.onload = () =>{
@@ -12,7 +12,9 @@ window.onload = () =>{
         window.location.href = 'index.html'
     }
     LE.innerHTML = ''
-    
+    let me = JSON.parse(localStorage.getItem('me'))
+
+    nomeUsuario.innerHTML = `${me.nome}`
     listAllCategorys();
 }
 
@@ -71,12 +73,19 @@ function listAllCategorys () {
 
 }
 
-const removeCategory = (elem) =>{
+const removeCategory = async(elem) =>{
     const id = elem.getAttribute('value');
     
     let result = confirm('Tem certeza que quer remover essa categoria?');
     
     if(result){
+        let categoria = await fetch(`http://localhost:3000/transacoes?categoria=${id}`).then(res => res.json())
+        console.log(categoria.length);
+        if(categoria.length > 0){
+            alert('Você possui transações para essa categoria, não é possível remove-la!')
+            return false
+        }
+
         fetch(`${URL}/${id}`,{
             method: 'DELETE',
         })
@@ -90,5 +99,6 @@ const removeCategory = (elem) =>{
 
 bntSair.addEventListener('click', () => {
     localStorage.removeItem('token')
+    localStorage.removeItem('me')
     window.location.href = 'index.html'
 })

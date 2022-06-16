@@ -1,22 +1,71 @@
 const bntSair = document.querySelector('.hover-sair')
-import { bancos } from "./dados.js";
-const URL = 'http://localhost:3000/contas';
+const btnOlho = document.querySelector('#img-olho')
+const saldoGeral = document.querySelector('#saldo-geral')
+const nomeUsuario = document.querySelector('#nome-usuario')
+
+const URL = 'http://localhost:3000';
 let idConta = '';
+let Saldo = null;
 
 window.onload = () => {
     if(!localStorage.getItem('token')){
         window.location.href = 'index.html'
     }
+    let me = JSON.parse(localStorage.getItem('me'))
 
-    listBank()
+    nomeUsuario.innerHTML = `${me.nome}`
+
+    calcSaldoGeral()
+    
     listRegistry()
 }
 
-const listBank = () => {
+const calcSaldoGeral = async() => {
+
+    let transacoes = null;
+    let categorias = null;
+    let contas = null;
+
+    transacoes = await fetch(`${URL}/transacoes`)
+    .then(res => res.json());
+
+    categorias = await fetch(`${URL}/categorias`)
+        .then(res => res.json());
+
+    contas = await fetch(`${URL}/contas`)
+    .then(res => res.json());
+
+    const dados = {   
+        transacoes,
+        categorias,
+        contas
+    };
+
+    let obj = null;
+    let data = [];
+    dados.contas.map( value => {
+        obj = {id: value.descricao, valor: 0};
+
+        dados.transacoes.forEach( desc => {
+            obj = {...obj, valor: desc.conta == value.id ? obj.valor + desc.valor : obj.valor + 0}
+        });
+        data.push(obj);
+        obj = null;
+    }) 
+
+
+    // data.forEach( value => Saldo += value.valor)
+    saldoGeral.innerHTML = Saldo
+    console.log(data);
+    
+    listBank(data)
+}
+
+const listBank = (data) => {
     const divConta = document.querySelector('.contas')
     divConta.innerHTML = ''
     let saldoTotal = 0;
-    fetch(URL)
+    fetch(`${URL}/contas`)
         .then(res => res.json())
         .then(contas => {   
             contas.map( value => {
@@ -50,8 +99,12 @@ const listBank = () => {
                 span1.innerHTML = 'R$ '
                 
                 const span2 = document.createElement('span')
-                span2.innerHTML = `${parseFloat(+value.valor).toFixed(2)}`
+                // let valor = data.map( desc =>  desc.id == value.descricao ? `${desc.valor}`.replace(',', '.').replace(',','') : null)
+                // let stringValor = +`${valor}`.replace(',','').replace(',','')
+                // span2.innerHTML =  stringValor.toFixed(2)
+                span2.innerHTML =  value.valor
 
+                
                 div2.appendChild(img)
                 div3.appendChild(h2)
                 parag.appendChild(span1)
@@ -65,20 +118,38 @@ const listBank = () => {
                 divConta.appendChild(div1)  
 
                 div3.addEventListener('click', (e) => {
-                    edit(e.currentTarget);
+                    // edit(e.currentTarget);
                 })
                 
             })
 
             const saldoGeral = document.querySelector('#saldo-geral')
-            // console.log(saldoGeral);
-            saldoGeral.innerHTML = saldoTotal
-            
+            saldoGeral.innerHTML = saldoTotal.toFixed(2)
+            Saldo = saldoTotal.toFixed(2)
         })
 
         
 
 }
+
+btnOlho.addEventListener('click', () => {
+    let toggleEyes = btnOlho.getAttribute('data-close');
+
+    if(toggleEyes == 'true'){
+        btnOlho.removeAttribute('data-close');
+        btnOlho.setAttribute('data-close', 'false');
+        saldoGeral.innerHTML = '---';
+        btnOlho.removeAttribute('src');
+        btnOlho.setAttribute('src', '../docs/img/olho-fechado.png');
+
+    } else {
+        btnOlho.removeAttribute('data-close');
+        btnOlho.setAttribute('data-close', 'true');
+        saldoGeral.innerHTML = Saldo;
+        btnOlho.removeAttribute('src');
+        btnOlho.setAttribute('src', '../docs/img/olho-aberto.png');
+    }
+})
 
 const listRegistry = () => {
 
