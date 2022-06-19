@@ -3,33 +3,36 @@ const email = document.querySelector('#email');
 const password = document.querySelector('#password');
 const form = document.querySelector('#formLogin');
 const btnSubmit = document.querySelector('#btnSubmit');
-const URL = 'http://localhost:3000/user';
+const URL = 'http://localhost:8080/usuarios';
+const URL2 = 'http://localhost:3000/user';
 let user = '';
 let me = '';
 
-window.onload = () =>{
+window.onload = async() =>{
     // console.log('login-load');
-    fetch(URL)
+    // await fetch(URL2)
+    //     .then(res => res.json())
+    //     .then(res => {
+    //         user = res
+    //     })
+    await fetch(URL)
         .then(res => res.json())
-        .then(res => {
-            user = res
-        })
+        .then(res => user = res)
         // .then(res => console.log(user))
+
 }   
 
-form.onsubmit = (e) => {
+form.onsubmit = async (e) => {
     e.preventDefault()
-    if( email.value.length == 0 || password.value.length == 0){
-        alert('Os campos precisam ser preenchidos');
-        return false;
-    }
+    // if( email.value.length == 0 || password.value.length == 0){
+    //     alert('Os campos precisam ser preenchidos');
+    //     return false;
+    // }
 
-    let validate = validateUserLogin({email: email.value, password: password.value})
+    let validate = await validateUserLogin({email: email.value, password: password.value})
     
     if(validate.success){
         localStorage.setItem('token', Math.floor(Math.random() * Date.now()))
-        console.log(me);
-        debugger;
         localStorage.setItem('me', JSON.stringify(me))
         window.location.href = 'home.html'
     } else if (validate.error){
@@ -40,18 +43,19 @@ form.onsubmit = (e) => {
         
 };
 
-const validateUserLogin = ({email, password}) => {
+const validateUserLogin = async ({email, password}) => {
     let login = {};
 
-    let validateEmail = user.find( elem => {
-        console.log(elem);
+    let validateEmail = user.find( value => {
         me = {
-            id: elem.id,
-            nome: elem.nome,
-            email: elem.email
+            id: value.id,
+            nome: value.nome,
+            email: value.email
         }
-        return elem.email == email
+
+        return value.email == email
     })
+
 
     if(!validateEmail){
         return login = {

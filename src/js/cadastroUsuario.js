@@ -1,22 +1,21 @@
 // import {user} from './user.js';
+// import { insertCustomer } from './db.js'
 const name = document.querySelector('#name');
 const email = document.querySelector('#email');
 const password = document.querySelector('#password');
 const confirmPassoword = document.querySelector('#confirmPassword');
 const form = document.querySelector('#formLogin');
 const btnSubmit = document.querySelector('#btnSubmit');
-const URL = 'http://localhost:3000/user';
+// const URL = 'http://localhost:3000/user';
+const URL = 'http://localhost:8080';
 let user = '';
 
-window.onload = () =>{
-    // console.log('onload-Cadastro')
-    fetch(URL)
+window.onload = async() =>{
+    console.log('onload-Cadastro')
+    await fetch(`${URL}/usuarios`)
         .then(res => res.json())
-        .then(res => {
-            user = res
-        })
-        // .then(res => console.log(user))
-
+        .then(res => user = res)
+        
 }
 
 
@@ -49,24 +48,24 @@ const validateEmail = ({email}) => {
     return findEmail;
 }
 
-const addUser = async (newUser) => {  
+// const addUser = async (newUser) => {  
 
-    fetch(URL, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newUser)
-    })  
-        .then((resp) => resp.json())
-        .then(function(data) {
-            // console.log(data);
-        })
+//     fetch(URL, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(newUser)
+//     })  
+//         .then((resp) => resp.json())
+//         .then(function(data) {
+//             // console.log(data);
+//         })
 
-}
+// }
 
 
-form.onsubmit = (e) => {
+form.onsubmit = async (e) => {
     e.preventDefault();
 
     let handleValues = validateValues({name,email,password,confirmPassoword})
@@ -95,13 +94,26 @@ form.onsubmit = (e) => {
         senha: password.value
     }
 
-    fetch(URL, {
+    fetch (`${URL}/novo_usuario`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(newUser)
     })
-    .then(res => alert('Cadastro realizado com sucesso.'))
+        .then(resp => {
+            if(resp.ok){
+                return resp.json()
+            } 
+            throw new Error();
+        })
+        .then(resp => {
+            alert('Cadastro realizado com sucesso!');
+            window.location.href = 'index.html'
+        })
+        .catch( err => {
+            alert('Erro ao cadastrar usuário, tente novamente')
+        })
+
         
 }

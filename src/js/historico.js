@@ -2,7 +2,7 @@ const bntSair = document.querySelector('.hover-sair');
 const nomeUsuario = document.querySelector('#nome-usuario');
 const listaLancamentos = document.querySelector('#lista-lancamentos');
 // const listaLancamentos = document.querySelector('#teste');
-const URL = 'http://localhost:3000';
+const URL = 'http://localhost:8080';
 
 window.onload = async () => {
     if(!localStorage.getItem('token')){
@@ -16,13 +16,13 @@ window.onload = async () => {
     let categorias = null;
     let contas = null;
 
-    transacoes = await fetch(`${URL}/transacoes`)
+    transacoes = await fetch(`${URL}/transacoes/${me.id}`)
     .then(res => res.json());
 
     categorias = await fetch(`${URL}/categorias`)
         .then(res => res.json());
 
-    contas = await fetch(`${URL}/contas`)
+    contas = await fetch(`${URL}/conta`)
     .then(res => res.json());
 
     const dados = {   

@@ -3,7 +3,9 @@ const divContainer = document.querySelector('#container-btn-valor')
 const form = document.querySelector('#formLimites')
 const inputValor = document.querySelector('#input-valor')
 const nomeUsuario = document.querySelector('#nome-usuario')
-const URL = 'http://localhost:3000'
+const btnLimite = document.querySelector("#btn-limite")
+// const URL = 'http://localhost:3000'
+const URL = 'http://localhost:8080/limites'
 let limites = '';
 
 window.onload = () => {
@@ -15,14 +17,15 @@ window.onload = () => {
 
     nomeUsuario.innerHTML = `${me.nome}`
 
-    fetch(`${URL}/limites`)
+    fetch(`${URL}`)
         .then(res => res.json())
         .then(res => {
             // console.log(res);
             limites = res
-            if(limites[4].ativo == 1)
+            if(limites[4] != null){
                 inputValor.value = limites[4].valor
-
+                btnLimite.style.background = '#8afd9d'
+            }
             listLimites()
         })
 
@@ -30,13 +33,13 @@ window.onload = () => {
 
 const listLimites = () => {
     limites.map( value => {
-        if(value.id == 5)
+        if(value.id > 4)
             return false
         const div = document.createElement('div')
         div.setAttribute('class', 'col-sm-3 col-md-3 text-center mb-3')
         
         const button = document.createElement('button')
-        button.setAttribute('class', `${value.ativo ? 'btn ativo' : 'btn'}`)
+        button.setAttribute('class', `${value.ativo == 1 ? 'btn ativo' : 'btn'}`)
         button.setAttribute('value', value.id)
         button.innerText = `R$ ${value.valor}`
 
@@ -54,42 +57,20 @@ const listLimites = () => {
     
 }   
 
-const desativarLimite = (value) => {
-    fetch(`${URL}/limites/${value.id}`,{
+const ativarLimite = (e) => {
+    let id = e.currentTarget.value;
+    
+    fetch(`http://localhost:8080/ativar_limite/${id}`,{
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({...value, ativo: null})
     })
         .then(res => res.json())
-}
-
-const ativarLimite = (e) => {
-    let id = e.currentTarget.value;
-    
-    limites.forEach( value => {
-        setTimeout( () => {
-
-        },1500)
-        if(value.id == id){
-            fetch(`${URL}/limites/${value.id}`,{
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({...value, ativo: 1})
-            })
-                .then(res => res.json())
-        } else{
-            desativarLimite(value)
-            
-        }
-    });
+        .then(res => console.log(res))
+        .then(() => location.reload())
     
 }
-
-
 
 bntSair.addEventListener('click', () => {
     localStorage.removeItem('token')
@@ -102,13 +83,17 @@ form.onsubmit = (e) =>{
     if(e.submitter.name == 'remover'){
         let result = confirm('Tem certeza que quer remover o limite?')
         if(result){
-            limites.map( value => {
-                setTimeout(() => {
-
-                },1500)
-                desativarLimite(value)
+            fetch('http://localhost:8080/desativa_limites', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             })
+                .then(res => res.json())
+                .then(res => console.log(res))
+                .then(() => location.reload())
         }
+        return
     }
         
     const valor = form.valor.value
@@ -121,25 +106,18 @@ form.onsubmit = (e) =>{
 
     let obj = {
         valor: +valor,
-        data: null,
+        usuarios_id: JSON.parse(localStorage.getItem('me')).id,
         ativo: 1,
     }
 
-    fetch(`${URL}/limites/${5}`,{
-        method: 'PUT',
+    fetch(`${URL}`,{
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(obj)
-    })
+    })  
+        .then(() => alert('Novo limite adicionado!'))
+        .then(() => location.reload())
 
-    limites.map((value) => {
-        setTimeout(() => {
-
-        },1500)
-        
-        if(value.id != 5){
-            desativarLimite(value)
-        }
-    })
 }

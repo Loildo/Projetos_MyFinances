@@ -3,7 +3,8 @@ const form = document.querySelector('#formCategoria');
 const LE = document.querySelector('.ladoEsquerdo');
 const bntSair = document.querySelector('.hover-sair')
 const nomeUsuario = document.querySelector('#nome-usuario')
-const URL = 'http://localhost:3000/categorias'
+// const URL = 'http://localhost:3000/categorias'
+const URL = 'http://localhost:8080/categorias'
 
 window.onload = () =>{
     // console.log('onload-categorias');
@@ -22,18 +23,25 @@ window.onload = () =>{
 form.onsubmit = (e) =>{
     e.preventDefault();
 
-    const categoria = JSON.stringify({id: Math.floor(Date.now() * Math.random()).toString(36) ,descricao: inputCategoria.value});
+    //const categoria = JSON.stringify({id: Math.floor(Date.now() * Math.random()).toString(36) ,descricao: inputCategoria.value});
 
+    
+    const categoria = {
+        nome: inputCategoria.value
+    }
+    
     inputCategoria.value = '';
+
     fetch(`${URL}`,{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: categoria
+        body: JSON.stringify(categoria)
     })
-        then(res => res.json())
-        then(() => {
+        .then(res => res.json())
+        .then((res) => {
+            // console.log(res);
             location.reload();
         })
 }
@@ -58,7 +66,7 @@ function listAllCategorys () {
         span.style.marginLeft = '10px'
         span.style.color = '#dd0100'
         span.style.cursor = 'pointer'
-        const txt = document.createTextNode(`${value.descricao}`)
+        const txt = document.createTextNode(`${value.nome}`)
         
         parag.appendChild(txt)
         div2.appendChild(parag)
@@ -79,20 +87,21 @@ const removeCategory = async(elem) =>{
     let result = confirm('Tem certeza que quer remover essa categoria?');
     
     if(result){
-        let categoria = await fetch(`http://localhost:3000/transacoes?categoria=${id}`).then(res => res.json())
+        let categoria = await fetch(`http://localhost:8080/transacoes_categorias/${id}`).then(res => res.json())
         console.log(categoria.length);
+
         if(categoria.length > 0){
             alert('Você possui transações para essa categoria, não é possível remove-la!')
             return false
-        }
-
-        fetch(`${URL}/${id}`,{
-            method: 'DELETE',
-        })
-            .then(res => res.json())
-            .then(() => {
-                location.reload();
+        } else {
+            fetch(`${URL}/${id}`,{
+                method: 'DELETE',
             })
+                .then(res => res.json())
+                .then((res) => {
+                    location.reload();
+                })
+        }
     }
     
 }

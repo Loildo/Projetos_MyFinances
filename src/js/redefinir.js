@@ -1,7 +1,11 @@
 const bntSair = document.querySelector('.hover-sair')
 const form = document.querySelector('#formRedefinir');
 const nomeUsuario = document.querySelector('#nome-usuario')
-const URL = 'http://localhost:3000/user';
+const passAtual = document.querySelector('#atualPass')
+const passNew = document.querySelector('#newPass')
+const confiPass = document.querySelector('#confPass')
+
+const URL = 'http://localhost:8080';
 let idConta = '';
 
 window.onload = () => {
@@ -35,40 +39,45 @@ const edit = async (e, atualPass, newPass) => {
     e.preventDefault()
     const user = JSON.parse(localStorage.getItem('me'));
 
-    const findUser = await fetch(`${URL}/${user.id}`)
+    const findUser = await fetch(`${URL}/usuarios/${user.id}`)
         .then(res => res.json())
+
+    console.log(findUser[0]);
 
     if(!findUser){
         alert('Houve algum problema!');
         return false;
     }
 
-    if(atualPass != findUser.senha){
+    if(atualPass != findUser[0].senha){
         alert('A senha atual esta incorreta');
+        passNew.value = '';
+        confiPass.value = '';
         return false;
     }
 
-    const data = {...user, senha: newPass}
+    const data = { senha: newPass}
     
-    const a = await fetch(`${URL}/${user.id}`,{
+    const result = await fetch(`${URL}/redefinir/${user.id}`,{
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
         body:  JSON.stringify(data) 
     })
-    .then( res => {
-        res.json()
-        if(res.status == 200){
-            return true
-        }
-    })
+        .then( res => {
+            res.json()
+            if(res.status == 200){
+                return true
+            }
+        })
 
-    if(a){
+    if(result){
         alert('Senha alterado com sucesso!');
+        location.reload();
     }
 }
 
 form.onsubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     let result = validateValues(form.atualPass.value, form.newPass.value, form.confPass.value);
     if(!result){

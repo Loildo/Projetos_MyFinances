@@ -3,7 +3,8 @@ const segundoCanvas = document.querySelector('#segundo-canvas')
 const primeiroCanvas = document.querySelector('#primeiro-canvas')
 const button = document.createElement('input')
 const nomeUsuario = document.querySelector('#nome-usuario')
-const URL = 'http://localhost:3000';
+// const URL = 'http://localhost:3000';
+const URL = 'http://localhost:8080';
 let transacoes = '';
 let categorias = '';
 let contas = '';
@@ -17,14 +18,14 @@ window.onload = async () => {
     nomeUsuario.innerHTML = `${me.nome}`
 
 
-    transacoes = await fetch(`${URL}/transacoes`)
+    transacoes = await fetch(`${URL}/transacoes/${me.id}`)
         .then(res => res.json());
 
     categorias = await fetch(`${URL}/categorias`)
         .then(res => res.json());
     
-        contas = await fetch(`${URL}/contas`)
-        .then(res => res.json());
+    contas = await fetch(`${URL}/conta`)
+    .then(res => res.json());
 
     const data = {   
         transacoes,
@@ -107,10 +108,10 @@ graficoVertical = (dados) =>{
     let obj = null;
     let data = [];
     dados.categorias.map( value => {
-        obj = {id: value.descricao, valor: 0, id_categoria: value.id};
+        obj = {id: value.nome, valor: 0, id_categoria: value.id};
 
         dados.transacoes.forEach( desc => {
-            obj = {...obj, valor: desc.categoria == value.id ? obj.valor + desc.valor : obj.valor + 0}
+            obj = {...obj, valor: desc.categoria_id == value.id ? obj.valor + desc.valor : obj.valor + 0}
         });
         data.push(obj);
         obj = null;
@@ -167,10 +168,10 @@ graficoHorizontal = (dados) =>{
     let obj = null;
     let data = [];
     dados.categorias.map( value => {
-        obj = {id: value.descricao, valor: 0};
+        obj = {id: value.nome, valor: 0};
 
         dados.transacoes.forEach( desc => {
-            obj = {...obj, valor: desc.categoria == value.id ? obj.valor + desc.valor : obj.valor + 0}
+            obj = {...obj, valor: desc.categoria_id == value.id ? obj.valor + desc.valor : obj.valor + 0}
         });
 
         data.push(obj);
@@ -223,10 +224,10 @@ graficoVerticalContas = (dados) =>{
     let obj = null;
     let data = [];
     dados.contas.map( value => {
-        obj = {id: value.descricao, valor: 0};
+        obj = {id: value.nome, valor: 0};
 
         dados.transacoes.forEach( desc => {
-            obj = {...obj, valor: desc.conta == value.id ? obj.valor + desc.valor : obj.valor + 0}
+            obj = {...obj, valor: desc.conta_id == value.id ? obj.valor + desc.valor : obj.valor + 0}
         });
         data.push(obj);
         obj = null;

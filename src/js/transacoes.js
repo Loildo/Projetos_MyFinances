@@ -9,7 +9,7 @@ const nomeUsuario = document.querySelector('#nome-usuario')
 // const btnLancamento = querySelector('input[type="radio"]:checked')
 
 
-const URL = 'http://localhost:3000'
+const URL = 'http://localhost:8080'
 let contas = '';
 let categorias = '';
 let tipo = '';
@@ -24,14 +24,14 @@ window.onload = () => {
 
     nomeUsuario.innerHTML = `${me.nome}`
 
-    fetch(`${URL}/transacoes`)
+    fetch(`${URL}/transacoes/${me.id}`)
         .then(res => res.json())
         .then(res => {
             // console.log(res);
         })
 
     // buscas as contas cadastras
-    fetch(`${URL}/contas`)
+    fetch(`${URL}/conta`)
         .then(res => res.json())
         .then(res => {
             contas = res
@@ -44,11 +44,11 @@ window.onload = () => {
             categorias = res
             listCategorias()
         })
-    fetch(`${URL}/limites?ativo=1`)
-        .then(resp => resp.json())
-        .then(res => {
-            limite = res
-        })
+    // fetch(`${URL}/limites?ativo=1`)
+    //     .then(resp => resp.json())
+    //     .then(res => {
+    //         limite = res
+    //     })
     
 
 }
@@ -67,11 +67,6 @@ bntTipo.forEach( (value, key) => {
                 label.style.color = 'green'
                 tipo = 2
                 break;
-
-            case 3:
-                label.style.color = 'blue'
-                tipo = 3
-                break;
         }
     })
 })
@@ -82,7 +77,7 @@ const listContas = () => {
     contas.map( value => {
         const option = document.createElement('option')
         option.setAttribute('value', value.id)
-        option.innerText= value.descricao
+        option.innerText= value.nome
 
         selectContas.appendChild(option)
     })
@@ -94,15 +89,15 @@ const listCategorias = () => {
     categorias.map( value => {
         const option = document.createElement('option')
         option.setAttribute('value', value.id)
-        option.innerText= value.descricao
+        option.innerText= value.nome
 
         selectCategorias.appendChild(option)
     })
 }
 
 // valida se os campos estão preenchidos
-const validateValues = ({ valor, descricao, data, conta, categoria }) => {
-    if(!tipo || !valor || !descricao || !data || !conta || !categoria ){
+const validateValues = ({ valor, descricao, data, conta_id, categoria_id }) => {
+    if(!tipo || !valor || !descricao || !data || !conta_id || !categoria_id ){
         return false
 
     }
@@ -112,10 +107,10 @@ const validateValues = ({ valor, descricao, data, conta, categoria }) => {
 
 form.onsubmit = async(e) => {
     e.preventDefault()
-    if(form.valor.value > limite[0].valor){
-        alert('O valor é maior que o limite de R$'+limite[0].valor+' adicionado!')
-        return false
-    }
+    // if(form.valor.value > limite[0].valor){
+    //     alert('O valor é maior que o limite de R$'+limite[0].valor+' adicionado!')
+    //     return false
+    // }
 
     const valor = form.valor.value
     const descricao = form.descricao.value
@@ -128,9 +123,11 @@ form.onsubmit = async(e) => {
         descricao,
         data,
         // recorrencia,
-        conta: selectContas.value,
-        categoria: selectCategorias.value
+        conta_id: +selectContas.value,
+        categoria_id: +selectCategorias.value,
+        usuarios_id: JSON.parse(localStorage.getItem('me')).id
     }
+
     let validate = validateValues(obj)
 
     if(!validate) {
@@ -145,14 +142,14 @@ form.onsubmit = async(e) => {
 const atualizarSaldoConta = async(obj) => {
     
     let conta = null;
-    await fetch(`${URL}/contas/${obj.conta}`)
+    await fetch(`${URL}/conta/${obj.conta_id}`)
         .then( res => res.json())
         .then(res => conta = res)
 
     let novoValor = parseFloat(conta.valor) + obj.valor
 
-    await fetch(`${URL}/contas/${obj.conta}`, {
-        method: 'PATCH',
+    await fetch(`${URL}/conta_valor/${obj.conta_id}`, {
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },

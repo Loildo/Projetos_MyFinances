@@ -8,7 +8,8 @@ const bntSair = document.querySelector('.hover-sair')
 const nomeUsuario = document.querySelector('#nome-usuario')
 let idConta = '';
 
-const URL = 'http://localhost:3000/contas';
+// const URL = 'http://localhost:3000/contas';
+const URL = 'http://localhost:8080/conta';
 
 window.onload = () =>{
     // console.log('load-minhas-contas');
@@ -38,7 +39,7 @@ form.onsubmit = (e) =>{
         }
 
         const conta = JSON.stringify({
-            id: idConta, descricao: banco.value, valor: saldo.value
+            nome: banco.value, valor: saldo.value
         })
 
         fetch(`${URL}/${idConta}`,{
@@ -49,9 +50,7 @@ form.onsubmit = (e) =>{
             body: conta
         })
             .then(res => res.json())
-            .then(res => {
-                location.reload()
-            })
+            .then(() => location.reload())
     
     } else {
         let validate = validateValues(saldo.value,banco.value)
@@ -61,7 +60,7 @@ form.onsubmit = (e) =>{
         }
 
         const conta = JSON.stringify({
-            descricao: banco.value, valor: saldo.value
+            nome: banco.value, valor: saldo.value
         })
 
         fetch(`${URL}`,{
@@ -72,9 +71,7 @@ form.onsubmit = (e) =>{
             body: conta
         })
             .then(res => res.json())
-            .then(res => {
-               location.reload()
-            })
+            .then(() => location.reload())
     }
 }
 
@@ -98,8 +95,8 @@ const edit = (elem) => {
         .then(res => res.json())
         .then(res => {
             // console.log(res)
-            banco.value = res.descricao
-            saldo.value = res.valor
+            banco.value = res[0].nome
+            saldo.value = res[0].valor
             idConta = id
             // console.log(idConta);
         })
@@ -110,11 +107,9 @@ const edit = (elem) => {
 const remove = async(elem) => {
     let result = confirm('Tem certeza que quer remover essa conta?');
 
-    
-    
     if(result){
         idConta = elem.getAttribute('value')
-        let transacoes = await fetch(`http://localhost:3000/transacoes?conta=${idConta}`).then(res => res.json())
+        let transacoes = await fetch(`http://localhost:8080/transacoes_contas/${idConta}`).then(res => res.json())
         console.log(transacoes);
         if(transacoes.length > 0){
             alert('Você possui transações para essa conta, não é possível remove-la!')
@@ -179,7 +174,7 @@ const listAllBank = () => {
             
                 const h2 = document.createElement('h2')
                 h2.style.margin = '0'
-                h2.innerHTML = `${value.descricao}`
+                h2.innerHTML = `${value.nome}`
             
                 const parag = document.createElement('p')
                 const span1 = document.createElement('span')

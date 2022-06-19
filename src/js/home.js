@@ -3,21 +3,21 @@ const btnOlho = document.querySelector('#img-olho')
 const saldoGeral = document.querySelector('#saldo-geral')
 const nomeUsuario = document.querySelector('#nome-usuario')
 const listaLancamentos = document.querySelector('#lista-lancamentos')
-const URL = 'http://localhost:3000';
+const URL = 'http://localhost:8080';
 let idConta = '';
 let Saldo = null;
+let me = '';
 
 window.onload = () => {
     if(!localStorage.getItem('token')){
         window.location.href = 'index.html'
     }
-    let me = JSON.parse(localStorage.getItem('me'))
+    me = JSON.parse(localStorage.getItem('me'))
 
     nomeUsuario.innerHTML = `${me.nome}`
 
     calcSaldoGeral()
     
-    listRegistry()
 }
 
 const calcSaldoGeral = async() => {
@@ -26,14 +26,14 @@ const calcSaldoGeral = async() => {
     let categorias = null;
     let contas = null;
 
-    transacoes = await fetch(`${URL}/transacoes`)
-    .then(res => res.json());
+    transacoes = await fetch(`${URL}/transacoes/${me.id}`)
+        .then(res => res.json());
 
     categorias = await fetch(`${URL}/categorias`)
         .then(res => res.json());
 
-    contas = await fetch(`${URL}/contas`)
-    .then(res => res.json());
+    contas = await fetch(`${URL}/conta`)
+        .then(res => res.json());
 
     const dados = {   
         transacoes,
@@ -53,7 +53,6 @@ const calcSaldoGeral = async() => {
         obj = null;
     }) 
 
-
     // data.forEach( value => Saldo += value.valor)
     saldoGeral.innerHTML = Saldo
     // console.log(data);
@@ -66,7 +65,7 @@ const listBank = (data) => {
     const divConta = document.querySelector('.contas')
     divConta.innerHTML = ''
     let saldoTotal = 0;
-    fetch(`${URL}/contas`)
+    fetch(`${URL}/conta`)
         .then(res => res.json())
         .then(contas => {   
             contas.map( value => {
@@ -92,7 +91,7 @@ const listBank = (data) => {
             
                 const h2 = document.createElement('h2')
                 h2.style.margin = '0'
-                h2.innerHTML = `${value.descricao}`
+                h2.innerHTML = `${value.nome}`
             
                 const parag = document.createElement('p')
                 const span1 = document.createElement('span')
@@ -157,7 +156,6 @@ btnOlho.addEventListener('click', () => {
 
 const listRegistry = (dados) => {
     listaLancamentos.innerHTML = '';
-    console.log(dados.transacoes);
     dados.transacoes.map( (value, index) => {
         if(index <= 4){
             const div1 = document.createElement('div')
